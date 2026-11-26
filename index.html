@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es" data-palette="azul">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mariano Tanoni Portfolio Visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: menú fijo arriba, portada a todo el ancho en verde, y debajo bandas alternadas con tarjetas y una línea de tiempo vertical. */
+:root {
+  --bg: #f4f6f5;
+  --surface: #ffffff;
+  --ink: #15201c;
+  --muted: #5a6762;
+  --line: #dbe2de;
+  --accent: #1f6b52;
+  --accent-soft: #e1efe9;
+  --hero-bg: #123d30;
+  --hero-ink: #f1f7f4;
+  --hero-muted: #b4d0c5;
+  --hero-accent: #7fd6b4;
+  --shadow: 0 1px 2px rgba(15,39,66,.06), 0 6px 18px rgba(15,39,66,.08);
+  --shadow-hover: 0 3px 6px rgba(15,39,66,.08), 0 18px 36px rgba(15,39,66,.18);
+  --font-body: "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101513;
+    --surface: #19201d;
+    --ink: #e8edea;
+    --muted: #9aa7a2;
+    --line: #2b3531;
+    --accent: #6fc3a4;
+    --accent-soft: #1d2e27;
+    --hero-bg: #0d2b22;
+    --hero-ink: #f1f7f4;
+    --hero-muted: #a9c6bb;
+    --hero-accent: #7fd6b4;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.28);
+    --shadow-hover: 0 3px 6px rgba(0,0,0,.35), 0 18px 36px rgba(0,0,0,.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101513;
+  --surface: #19201d;
+  --ink: #e8edea;
+  --muted: #9aa7a2;
+  --line: #2b3531;
+  --accent: #6fc3a4;
+  --accent-soft: #1d2e27;
+  --hero-bg: #0d2b22;
+  --hero-ink: #f1f7f4;
+  --hero-muted: #a9c6bb;
+  --hero-accent: #7fd6b4;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.28);
+  --shadow-hover: 0 3px 6px rgba(0,0,0,.35), 0 18px 36px rgba(0,0,0,.5);
+  color-scheme: dark;
+}
+
+/* Paletas alternativas: verde es la base; azul y ámbar redefinen los mismos tokens. */
+:root[data-palette="azul"] { --accent: #1b5f99; --accent-soft: #e2edf7; --hero-bg: #0f2742; --hero-muted: #b5c9de; --hero-accent: #5cc8f0; --bg: #f3f5f8; --line: #dae0e8; --ink: #141c26; --muted: #586474; }
+:root[data-palette="ambar"] { --accent: #8a5a00; --accent-soft: #f7eeda; --hero-bg: #1f2328; --hero-muted: #c9c5bc; --hero-accent: #f5b642; --bg: #f6f5f2; --line: #e2dfd8; --ink: #1c1b19; --muted: #66625a; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-palette="azul"] { --accent: #6cbcf0; --accent-soft: #1a2a3a; --hero-bg: #0b1d33; --bg: #0f141a; --surface: #171e27; --line: #283340; --ink: #e8ecf1; --muted: #98a4b3; }
+  :root:not([data-theme="light"])[data-palette="ambar"] { --accent: #f0b548; --accent-soft: #33291a; --hero-bg: #191c20; --bg: #131312; --surface: #1d1c1a; --line: #33312d; --ink: #eeece7; --muted: #a8a399; }
+}
+:root[data-theme="dark"][data-palette="azul"] { --accent: #6cbcf0; --accent-soft: #1a2a3a; --hero-bg: #0b1d33; --bg: #0f141a; --surface: #171e27; --line: #283340; --ink: #e8ecf1; --muted: #98a4b3; }
+:root[data-theme="dark"][data-palette="ambar"] { --accent: #f0b548; --accent-soft: #33291a; --hero-bg: #191c20; --bg: #131312; --surface: #1d1c1a; --line: #33312d; --ink: #eeece7; --muted: #a8a399; }
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--hero-accent); outline-offset: 3px; border-radius: 4px; }
+img { max-width: 100%; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+/* Menú fijo */
+.topbar { position: sticky; top: 0; z-index: 20; background: var(--hero-bg); border-bottom: 2px solid var(--hero-accent); box-shadow: 0 6px 20px rgba(0,0,0,.22); }
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 8px 24px; min-height: 60px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; color: var(--hero-ink); text-decoration: none; flex: none; }
+.brand-mark {
+  display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px;
+  background: var(--hero-accent); color: var(--hero-bg); font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+}
+.nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; overflow-x: auto; }
+.nav li { flex: none; }
+.nav ul a { display: block; padding: 7px 14px; border-radius: 8px; color: var(--hero-muted); text-decoration: none; font-size: 15px; font-weight: 500; transition: background-color .2s, color .2s; }
+.nav ul a:hover { color: var(--hero-ink); background: color-mix(in srgb, var(--hero-accent) 18%, transparent); }
+.nav ul a.active { background: var(--hero-accent); color: var(--hero-bg); }
+.menu-btn {
+  display: none; width: 44px; height: 44px; padding: 0; border-radius: 10px; cursor: pointer;
+  background: transparent; border: 1.5px solid color-mix(in srgb, var(--hero-accent) 45%, transparent);
+  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+}
+.menu-btn span { display: block; width: 20px; height: 2px; border-radius: 2px; background: var(--hero-accent); transition: transform .3s, opacity .2s; }
+.menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.menu-btn:focus-visible { outline: 2px solid var(--hero-accent); outline-offset: 2px; }
+@keyframes drop { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@media (max-width: 760px) {
+  .menu-btn { display: flex; }
+  .nav ul {
+    display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 2px;
+    padding: 10px 16px 16px; background: var(--hero-bg); border-bottom: 2px solid var(--hero-accent);
+    box-shadow: 0 14px 24px rgba(0,0,0,.3); overflow: visible;
+  }
+  .nav ul.open { display: flex; animation: drop .25s ease; }
+  .nav ul a { padding: 12px 14px; font-size: 16px; }
+}
+
+/* Portada */
+.hero { background: var(--hero-bg); color: var(--hero-ink); }
+.hero, .contact { position: relative; overflow: hidden; }
+.circuit { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero::before, .contact::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg, var(--hero-bg) 0%, color-mix(in srgb, var(--hero-bg) 88%, transparent) 38%, color-mix(in srgb, var(--hero-bg) 25%, transparent) 100%);
+}
+.hero > .wrap, .contact > .wrap { position: relative; z-index: 2; }
+main section { position: relative; overflow: hidden; }
+main section > .wrap { position: relative; z-index: 2; }
+
+/* Fotos que rotan */
+.photo-box { flex: none; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+button.photo { position: relative; cursor: pointer; appearance: none; font: inherit; color: inherit; transition: transform .3s; }
+button.photo:hover { transform: scale(1.03); }
+.photo .frame { position: relative; display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden; background: var(--hero-bg); }
+.photo .frame img { position: absolute; inset: 0; opacity: 0; transform: scale(1.08); transition: opacity .9s ease, transform 1.4s ease; }
+.photo .frame img.on { opacity: 1; transform: none; }
+.dots { display: flex; gap: 7px; }
+.dots i { width: 7px; height: 7px; border-radius: 50%; background: color-mix(in srgb, var(--hero-accent) 30%, transparent); transition: background-color .3s, transform .3s; }
+.dots i.on { background: var(--hero-accent); transform: scale(1.35); }
+.stat, .contact-item { background: color-mix(in srgb, var(--hero-bg) 72%, transparent); }
+.photo { background: var(--hero-bg); }
+
+/* Selector de paleta (provisorio, para elegir) */
+.palette {
+  position: fixed; left: 20px; bottom: 20px; z-index: 30; display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px 8px 14px; border-radius: 99px; background: var(--surface); border: 1px solid var(--line);
+  box-shadow: 0 8px 22px rgba(0,0,0,.2); font-size: 13px; font-weight: 500; color: var(--muted);
+}
+.palette button { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--surface); outline: 1px solid var(--line); cursor: pointer; padding: 0; transition: transform .2s; }
+.palette button:hover { transform: scale(1.15); }
+.palette button[aria-pressed="true"] { outline: 2px solid var(--ink); }
+.palette button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#pal-verde { background: linear-gradient(135deg, #123d30 50%, #7fd6b4 50%); }
+#pal-azul { background: linear-gradient(135deg, #0f2742 50%, #5cc8f0 50%); }
+#pal-ambar { background: linear-gradient(135deg, #1f2328 50%, #f5b642 50%); }
+.hero-inner { display: flex; flex-wrap: wrap-reverse; align-items: center; gap: 32px 56px; padding: 64px 24px 40px; }
+.hero-text { flex: 1 1 420px; display: flex; flex-direction: column; gap: 14px; }
+.role { font-family: var(--font-mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--hero-accent); margin: 0; }
+h1 { font-size: clamp(40px, 7vw, 68px); line-height: 1.02; font-weight: 700; letter-spacing: -.025em; margin: 0; text-wrap: balance; }
+.lead { font-size: 20px; color: var(--hero-muted); margin: 0; max-width: 52ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.btn { display: inline-block; padding: 12px 22px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1.5px solid var(--hero-accent); }
+.btn.primary { background: var(--hero-accent); color: var(--hero-bg); }
+.btn.ghost { color: var(--hero-accent); }
+.btn:hover { filter: brightness(1.08); }
+.photo { flex: none; width: 230px; height: 230px; border-radius: 50%; padding: 6px; border: 2px solid var(--hero-accent); }
+.photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 50%; display: block; background: #fff; }
+@media (max-width: 520px) { .photo { width: 150px; height: 150px; } .hero-inner { padding-top: 40px; } }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; padding: 0 24px 56px; }
+.stat { display: flex; align-items: baseline; gap: 14px; padding: 18px 20px; border: 1px solid color-mix(in srgb, var(--hero-accent) 35%, transparent); border-radius: 12px; }
+.stat b { font-size: 34px; line-height: 1; font-weight: 700; color: var(--hero-accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.stat span { font-size: 15px; color: var(--hero-muted); line-height: 1.35; }
+
+/* Secciones */
+section { padding: 72px 0; scroll-margin-top: 60px; }
+section.alt { background: var(--surface); border-block: 1px solid var(--line); }
+@media (max-width: 760px) { section { padding: 52px 0; scroll-margin-top: 92px; } }
+.eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; }
+h2 { font-size: clamp(28px, 4vw, 38px); line-height: 1.15; font-weight: 700; letter-spacing: -.015em; margin: 0 0 32px; text-wrap: balance; }
+section p { margin: 0; }
+
+/* Perfil */
+.profile { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px 48px; font-size: 19px; }
+.profile p { max-width: 60ch; }
+.path { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 32px; font-family: var(--font-mono); font-size: 13px; }
+.path span { padding: 6px 12px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); }
+.path span.now { background: var(--accent); color: var(--bg); }
+.path i { color: var(--muted); font-style: normal; }
+
+/* Línea de tiempo */
+.tl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.tl li { display: grid; grid-template-columns: 170px 1fr; gap: 0 32px; }
+.tl .when { font-family: var(--font-mono); font-size: 14px; color: var(--muted); padding-top: 22px; text-align: right; font-variant-numeric: tabular-nums; }
+.tl .what { position: relative; border-left: 2px solid var(--line); padding: 0 0 20px 32px; }
+.tl li:last-child .what { padding-bottom: 0; }
+.tl .what::before {
+  content: ""; position: absolute; left: -8px; top: 24px; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--bg); border: 3px solid var(--accent);
+}
+.tl li.current .what::before { background: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 4px; }
+.card h3 { font-size: 19px; font-weight: 600; margin: 0; line-height: 1.3; }
+.card .org { color: var(--accent); font-weight: 600; font-size: 15px; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.card p { color: var(--muted); font-size: 16px; margin-top: 4px; }
+.pill { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; background: var(--accent-soft); color: var(--accent); padding: 2px 9px; border-radius: 99px; }
+@media (max-width: 640px) {
+  .tl li { grid-template-columns: 1fr; }
+  .tl .when { text-align: left; padding: 0 0 6px 34px; border-left: 2px solid var(--line); }
+  .tl .what::before { top: -22px; }
+}
+
+/* Barra de trayectoria */
+.span-bar { margin: 0 0 44px; }
+.span-bar .bar { display: flex; gap: 4px; height: 16px; }
+.span-bar .bar span { position: relative; background: var(--accent); border-radius: 4px; transition: transform .2s, opacity .2s; }
+.span-bar .bar span:nth-child(1) { opacity: .3; }
+.span-bar .bar span:nth-child(2) { opacity: .45; }
+.span-bar .bar span:nth-child(3) { opacity: .6; }
+.span-bar .bar span:nth-child(4) { opacity: .8; }
+.span-bar .bar span:hover { opacity: 1; transform: scaleY(1.5); }
+.span-bar .bar span::after {
+  content: attr(data-label); position: absolute; left: 50%; bottom: 150%; transform: translateX(-50%);
+  background: var(--ink); color: var(--bg); font-size: 12px; padding: 4px 10px; border-radius: 6px;
+  white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.span-bar .bar span:first-child::after { left: 0; transform: none; }
+.span-bar .bar span:last-child::after { left: auto; right: 0; transform: none; }
+.span-bar .bar span:hover::after { opacity: 1; }
+.span-bar .years { display: flex; gap: 4px; margin-top: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.span-bar .years span { white-space: nowrap; }
+.span-bar .caption { display: flex; justify-content: space-between; gap: 16px; margin-top: 8px; font-size: 14px; color: var(--muted); }
+@media (max-width: 640px) { .span-bar .years { display: none; } }
+
+/* Sombras y hover de las tarjetas */
+.card, .edu, .skill, .project { box-shadow: var(--shadow); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.card:hover, .edu:hover, .skill:hover, .project:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
+.skill.learning, .project.empty { box-shadow: none; }
+.skill.learning:hover, .project.empty:hover { box-shadow: none; }
+.skill .icon { transition: background-color .25s, color .25s, transform .25s; }
+.skill:hover .icon { background: var(--accent); color: var(--surface); transform: rotate(-8deg) scale(1.08); }
+.chips li { transition: transform .2s, border-color .2s, color .2s; }
+.chips li:hover { transform: translateY(-2px); border-color: var(--accent); color: var(--accent); }
+.stat { transition: background-color .25s, transform .25s; }
+.stat:hover { background: color-mix(in srgb, var(--hero-accent) 16%, var(--hero-bg)); transform: translateY(-3px); }
+.btn { transition: transform .2s, filter .2s; }
+.btn:hover { transform: translateY(-2px); }
+.contact-item { transition: background-color .25s, transform .25s; }
+.contact-item:hover { background: color-mix(in srgb, var(--hero-accent) 16%, var(--hero-bg)); transform: translateY(-3px); }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 5px var(--accent-soft); } 50% { box-shadow: 0 0 0 10px var(--accent-soft); } }
+.tl li.current .what::before { animation: pulse 2.4s ease-in-out infinite; }
+@keyframes rise { from { opacity: .3; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+.reveal { animation: rise .7s ease both; }
+
+/* Botón para volver arriba */
+.to-top {
+  position: fixed; right: 20px; bottom: 20px; z-index: 30; width: 50px; height: 50px; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer; border: 2px solid var(--hero-accent);
+  background: var(--hero-bg); color: var(--hero-accent); box-shadow: 0 8px 22px rgba(0,0,0,.3);
+  opacity: 0; visibility: hidden; transform: translateY(12px);
+  transition: opacity .3s, transform .3s, visibility .3s, background-color .2s, color .2s;
+}
+.to-top.show { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover { background: var(--hero-accent); color: var(--hero-bg); transform: translateY(-3px); }
+.to-top:focus-visible { outline: 2px solid var(--hero-accent); outline-offset: 3px; }
+.to-top svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Formación */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+.edu { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.edu.featured { background: var(--accent-soft); border-color: var(--accent); }
+.edu .year { font-family: var(--font-mono); font-size: 13px; color: var(--accent); font-variant-numeric: tabular-nums; display: flex; gap: 10px; align-items: center; }
+.edu h3 { font-size: 18px; font-weight: 600; margin: 0; line-height: 1.3; }
+.edu .place { font-size: 15px; color: var(--muted); }
+.edu p { font-size: 15px; color: var(--muted); }
+
+/* Habilidades */
+.skill { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+.skill-head { display: flex; align-items: center; gap: 12px; }
+.icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); flex: none; }
+.icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.skill h3 { font-size: 17px; font-weight: 600; margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.chips li { font-size: 14px; padding: 5px 12px; border-radius: 8px; background: var(--bg); border: 1px solid var(--line); }
+.skill.learning { border-style: dashed; background: transparent; }
+.skill.learning .chips li { border-style: dashed; background: transparent; color: var(--muted); }
+
+/* Proyectos */
+.project { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+.project-art { height: 120px; background: var(--hero-bg); color: var(--hero-accent); display: grid; place-items: center; font-family: var(--font-mono); font-size: 14px; }
+.project-art pre { margin: 0; font: inherit; line-height: 1.5; }
+.project-body { padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+.project h3 { font-size: 18px; font-weight: 600; margin: 0; }
+.project p { font-size: 15px; color: var(--muted); }
+.project .tech { display: flex; gap: 8px; margin-top: 4px; }
+.project.empty { border-style: dashed; background: transparent; }
+.project.empty .project-art { background: transparent; color: var(--muted); border-bottom: 1px dashed var(--line); font-size: 30px; }
+
+/* Contacto */
+.contact { background: var(--hero-bg); color: var(--hero-ink); }
+.contact .eyebrow { color: var(--hero-accent); }
+.contact h2 { margin-bottom: 12px; }
+.contact .sub { color: var(--hero-muted); font-size: 19px; max-width: 52ch; margin-bottom: 32px; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.contact-item { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--hero-accent) 35%, transparent); min-width: 0; }
+.contact-item .icon { background: color-mix(in srgb, var(--hero-accent) 18%, transparent); color: var(--hero-accent); }
+.contact-item div { display: flex; flex-direction: column; min-width: 0; }
+.contact-item small { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--hero-muted); }
+.contact-item a, .contact-item span { color: var(--hero-ink); font-size: 16px; font-weight: 500; overflow-wrap: anywhere; }
+
+footer { background: var(--hero-bg); color: var(--hero-muted); font-family: var(--font-mono); font-size: 13px; padding: 0 0 36px; }
+footer .wrap { border-top: 1px solid color-mix(in srgb, var(--hero-accent) 25%, transparent); padding-top: 20px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <nav class="nav wrap" aria-label="Secciones">
+    <a class="brand" href="#inicio"><span class="brand-mark">MT</span>Mariano Tanoni</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <ul id="menu">
+      <li><a href="#perfil">Perfil</a></li>
+      <li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#formacion">Formación</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+</div>
+
+<header class="hero" id="inicio">
+  <canvas class="circuit" aria-hidden="true"></canvas>
+  <div class="hero-inner wrap">
+    <div class="hero-text">
+      <p class="role">Técnico en Electrónica, Informática y Electricidad</p>
+      <h1>Mariano Alberto Tanoni</h1>
+      <p class="lead">Más de 20 años de trabajo técnico en campo. Hoy instalo y configuro redes informáticas y estudio programación en la UTN.</p>
+      <div class="actions">
+        <a class="btn primary" href="#contacto">Contactarme</a>
+        <a class="btn ghost" href="#experiencia">Ver experiencia</a>
+      </div>
+    </div>
+    <div class="photo-box">
+      <button class="photo" id="photo" type="button" aria-label="Cambiar foto" title="Click para cambiar la foto">
+        <span class="frame">
+          <img class="on" src="foto.jpg" alt="Foto de Mariano Tanoni" width="230" height="230">
+          <img src="foto1.jpg" alt="Mariano en versión muñeco de arcilla" width="230" height="230">
+          <img src="foto2.jpg" alt="Mariano en versión muñeco cabezón" width="230" height="230">
+          <img src="foto3.jpg" alt="Retrato de Mariano con estética de los setenta" width="230" height="230">
+          <img src="foto4.jpg" alt="Retrato de Mariano con estética de los setenta, junto a un televisor" width="230" height="230">
+          <img src="foto5.jpg" alt="Caricatura de Mariano con el pulgar arriba" width="230" height="230">
+          <img src="foto6.jpg" alt="Mariano como personaje de videojuego en pixel art" width="230" height="230">
+          <img src="foto7.jpg" alt="Selfie de Mariano bajo el agua" width="230" height="230">
+        </span>
+      </button>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+    </div>
+  </div>
+  <div class="stats wrap">
+    <div class="stat"><b>+20</b><span>años de trayectoria técnica</span></div>
+    <div class="stat"><b>5</b><span>empresas, de técnico a jefe de obra y de servicio</span></div>
+    <div class="stat"><b>2°</b><span>año de la Tecnicatura en Programación, UTN</span></div>
+  </div>
+</header>
+
+<main>
+  <section id="perfil">
+    <canvas class="circuit" data-tone="light" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <p class="eyebrow">Perfil</p>
+      <h2>Del tablero eléctrico al código</h2>
+      <div class="profile">
+        <p>Soy técnico con más de 20 años de trayectoria en electricidad industrial, automatización y soporte técnico. En los últimos años hice una transición consciente hacia las redes informáticas y la programación, con VB.NET y SQL como primeras herramientas.</p>
+        <p>Curso la Tecnicatura Universitaria en Programación en la UTN. Combino el conocimiento de campo y de hardware con el de sistemas, y me integro rápido en entornos nuevos.</p>
+      </div>
+      <div class="path" aria-label="Recorrido profesional">
+        <span>Electrónica</span><i>→</i>
+        <span>Servicio técnico</span><i>→</i>
+        <span>Electricidad industrial</span><i>→</i>
+        <span>Redes</span><i>→</i>
+        <span class="now">Programación</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="experiencia" class="alt">
+    <canvas class="circuit" data-tone="light" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <p class="eyebrow">Experiencia</p>
+      <h2>Trayectoria laboral</h2>
+      <div class="span-bar" aria-label="Trayectoria laboral de 1998 a hoy">
+        <div class="bar" aria-hidden="true">
+          <span style="flex:2" data-label="LB Sistemas · 1998–2000"></span>
+          <span style="flex:13.4" data-label="Veragi S.R.L. · 2001–2014"></span>
+          <span style="flex:6.3" data-label="SEL Servicios Electrónicos · 2014–2020"></span>
+          <span style="flex:2.2" data-label="Dyme · 2021–2023"></span>
+          <span style="flex:3.7" data-label="Dinatech · 2023–hoy"></span>
+        </div>
+        <div class="years" aria-hidden="true">
+          <span style="flex:2">1998</span>
+          <span style="flex:13.4">2001</span>
+          <span style="flex:6.3">2014</span>
+          <span style="flex:2.2">2021</span>
+          <span style="flex:3.7">2023</span>
+        </div>
+        <div class="caption"><span>Electrónica y servicio técnico</span><span>Redes y programación</span></div>
+      </div>
+      <ol class="tl">
+        <li class="current">
+          <div class="when">Mar 2023 – Actualidad</div>
+          <div class="what"><article class="card" style="background:var(--bg)">
+            <h3>Técnico en Redes Informáticas</h3>
+            <div class="org">Dinatech <span class="pill">Actual</span></div>
+            <p>Instalación y configuración de redes informáticas.</p>
+          </article></div>
+        </li>
+        <li>
+          <div class="when">Ene 2021 – Mar 2023</div>
+          <div class="what"><article class="card" style="background:var(--bg)">
+            <h3>Jefe de Obra (Oficial Electricista)</h3>
+            <div class="org">Dyme</div>
+            <p>Instalaciones eléctricas industriales en general y automatización.</p>
+          </article></div>
+        </li>
+        <li>
+          <div class="when">May 2014 – Sep 2020</div>
+          <div class="what"><article class="card" style="background:var(--bg)">
+            <h3>Jefe de Servicio Técnico de Campo</h3>
+            <div class="org">SEL Servicios Electrónicos</div>
+            <p>Servicio técnico de campo, en modalidad tercerizada para la empresa.</p>
+          </article></div>
+        </li>
+        <li>
+          <div class="when">Ene 2001 – Jun 2014</div>
+          <div class="what"><article class="card" style="background:var(--bg)">
+            <h3>Supervisor de Laboratorio</h3>
+            <div class="org">Veragi S.R.L.</div>
+            <p>Supervisión de laboratorio y crecimiento profesional dentro de la empresa.</p>
+          </article></div>
+        </li>
+        <li>
+          <div class="when">Ago 1998 – Ago 2000</div>
+          <div class="what"><article class="card" style="background:var(--bg)">
+            <h3>Técnico</h3>
+            <div class="org">LB Sistemas</div>
+            <p>Rol técnico con un fuerte proceso de aprendizaje inicial.</p>
+          </article></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="formacion">
+    <canvas class="circuit" data-tone="light" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <p class="eyebrow">Formación</p>
+      <h2>Formación académica</h2>
+      <div class="grid">
+        <article class="edu featured">
+          <div class="year">En curso · 2° año <span class="pill" style="background:var(--accent);color:var(--bg)">Hoy</span></div>
+          <h3>Tecnicatura Universitaria en Programación</h3>
+          <div class="place">UTN</div>
+        </article>
+        <article class="edu" style="background:var(--surface)">
+          <div class="year">Curso</div>
+          <h3>VB.NET</h3>
+          <div class="place">SEC, Sindicato Empleados de Comercio</div>
+          <p>Desarrollo de un proyecto con conexión a base de datos SQL.</p>
+        </article>
+        <article class="edu" style="background:var(--surface)">
+          <div class="year">2022</div>
+          <h3>Curso de Diseño Web</h3>
+          <div class="place">Coder House</div>
+        </article>
+        <article class="edu" style="background:var(--surface)">
+          <div class="year">2017</div>
+          <h3>Técnico Electricista Industrial y Programador de PLC</h3>
+          <div class="place">Instituto Técnico Monte Grande</div>
+        </article>
+        <article class="edu" style="background:var(--surface)">
+          <div class="year">2009</div>
+          <h3>Ingeniería en Sistemas (incompleta)</h3>
+          <div class="place">Universidad Abierta Interamericana (UAI)</div>
+          <p>Cursada hasta 2° año.</p>
+        </article>
+        <article class="edu" style="background:var(--surface)">
+          <div class="year">2000</div>
+          <h3>Técnico Electrónico</h3>
+          <div class="place">E.T. N° 25 Fray Luis Beltrán</div>
+          <p>Secundario completo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="habilidades" class="alt">
+    <canvas class="circuit" data-tone="light" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <p class="eyebrow">Habilidades</p>
+      <h2>Lo que sé hacer y lo que estoy aprendiendo</h2>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr))">
+        <article class="skill" style="background:var(--bg)">
+          <div class="skill-head"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 5l-3 14"/></svg></span><h3>Programación y datos</h3></div>
+          <ul class="chips"><li>VB.NET</li><li>SQL</li><li>Excel avanzado</li></ul>
+        </article>
+        <article class="skill" style="background:var(--bg)">
+          <div class="skill-head"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><h3>Técnicas y de campo</h3></div>
+          <ul class="chips"><li>Redes informáticas</li><li>Electrónica</li><li>Electricidad industrial</li><li>Programación de PLC</li></ul>
+        </article>
+        <article class="skill" style="background:var(--bg)">
+          <div class="skill-head"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/></svg></span><h3>Gestión y herramientas</h3></div>
+          <ul class="chips"><li>Logística y gestión</li><li>Microsoft Office</li><li>Diseño gráfico</li></ul>
+        </article>
+        <article class="skill learning">
+          <div class="skill-head"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5v-15zM4 20.5A2.5 2.5 0 006.5 23H20v-5"/></svg></span><h3>En aprendizaje</h3></div>
+          <ul class="chips"><li>.NET</li><li>TypeScript</li><li>Diseño web</li><li>Programación (UTN)</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <canvas class="circuit" data-tone="light" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <p class="eyebrow">Proyectos</p>
+      <h2>Proyectos</h2>
+      <div class="grid">
+        <article class="project" style="background:var(--surface)">
+          <div class="project-art" aria-hidden="true"><pre>SELECT * FROM proyectos
+WHERE stack = 'VB.NET'</pre></div>
+          <div class="project-body">
+            <h3>Aplicación con base de datos</h3>
+            <p>Proyecto desarrollado en el curso de VB.NET, con conexión a una base de datos SQL.</p>
+            <div class="tech"><span class="pill">VB.NET</span><span class="pill">SQL</span></div>
+          </div>
+        </article>
+        <article class="project empty">
+          <div class="project-art" aria-hidden="true">+</div>
+          <div class="project-body">
+            <h3>Próximamente</h3>
+            <p>Acá voy a ir sumando los proyectos que desarrolle durante la Tecnicatura en Programación.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="contact">
+    <canvas class="circuit" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <p class="eyebrow">Contacto</p>
+      <h2>Hablemos</h2>
+      <p class="sub">Estoy buscando sumarme a un equipo donde pueda aportar mi experiencia técnica y seguir creciendo en programación.</p>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+          <div><small>Email</small><a href="mailto:marianotanoni.mat@gmail.com">marianotanoni.mat@gmail.com</a></div>
+        </div>
+        <div class="contact-item">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A15 15 0 013 6a2 2 0 012-2z"/></svg></span>
+          <div><small>Teléfono</small><a href="tel:+541130425839">11-3042-5839</a></div>
+        </div>
+        <div class="contact-item">
+          <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <div><small>Ubicación</small><span>Monte Grande, Buenos Aires</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Mariano Alberto Tanoni · Portfolio</div></footer>
+
+<button class="to-top" id="to-top" type="button" aria-label="Volver al principio" title="Volver al principio">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var topbar = document.querySelector('.topbar');
+  var toTop = document.getElementById('to-top');
+  var links = Array.prototype.slice.call(document.querySelectorAll('#menu a'));
+  var sections = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+
+  // Desplazamiento lento y suave hasta una posición.
+  var raf = null;
+  function scrollToY(target) {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    target = Math.max(0, Math.min(target, max));
+    if (reduce) { window.scrollTo(0, target); return; }
+    var start = window.scrollY, dist = target - start, t0 = null;
+    var duration = Math.min(1800, Math.max(900, Math.abs(dist) * 0.6));
+    cancelAnimationFrame(raf);
+    function step(t) {
+      if (t0 === null) t0 = t;
+      var k = Math.min(1, (t - t0) / duration);
+      var e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+      window.scrollTo(0, start + dist * e);
+      if (k < 1) raf = requestAnimationFrame(step);
+    }
+    raf = requestAnimationFrame(step);
+  }
+  ['wheel', 'touchstart', 'keydown'].forEach(function (ev) {
+    window.addEventListener(ev, function () { cancelAnimationFrame(raf); }, { passive: true });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (ev) {
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      if (!el) return;
+      ev.preventDefault();
+      var y = el.id === 'inicio' ? 0 : el.getBoundingClientRect().top + window.scrollY - topbar.offsetHeight + 1;
+      scrollToY(y);
+    });
+  });
+  toTop.addEventListener('click', function () { scrollToY(0); });
+
+  // Marca en el menú la sección visible y muestra el botón para volver arriba.
+  function update() {
+    var y = window.scrollY + topbar.offsetHeight + 80, current = -1;
+    sections.forEach(function (s, i) { if (s && s.offsetTop <= y) current = i; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = links.length - 1;
+    links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+    toTop.classList.toggle('show', window.scrollY > 500);
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+
+  // Fondo ilustrado: pistas de circuito con pulsos que las recorren.
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  var DIRS = [[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]];
+  var boards = Array.prototype.slice.call(document.querySelectorAll('canvas.circuit')).map(function (cv, idx) {
+    return { cv: cv, ctx: cv.getContext('2d'), seed: 11 + idx * 7, traces: [], base: document.createElement('canvas'), w: 0, h: 0 };
+  });
+  function build(b) {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = b.cv.clientWidth, h = b.cv.clientHeight;
+    if (!w || !h) return;
+    b.w = w; b.h = h;
+    b.cv.width = b.base.width = Math.round(w * dpr); b.cv.height = b.base.height = Math.round(h * dpr);
+    b.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var g = b.base.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+    var rootCs = getComputedStyle(document.documentElement);
+    var light = b.cv.dataset.tone === 'light';
+    var color = rootCs.getPropertyValue(light ? '--accent' : '--hero-accent').trim() || '#5cc8f0';
+    var padBg = getComputedStyle(b.cv.parentElement).backgroundColor;
+    if (!padBg || padBg === 'transparent' || padBg === 'rgba(0, 0, 0, 0)') padBg = rootCs.getPropertyValue('--bg').trim();
+    b.color = color; b.light = light;
+    var r = rng(b.seed), cell = 26, cols = Math.ceil(w / cell), rows = Math.ceil(h / cell);
+    var n = Math.round(w * h / (light ? 30000 : 16000));
+    b.traces = [];
+    g.strokeStyle = color; g.fillStyle = color; g.lineWidth = 1.3; g.lineJoin = 'round';
+    for (var i = 0; i < n; i++) {
+      var x = Math.floor(r() * cols), y = Math.floor(r() * rows), d = Math.floor(r() * 4) * 2;
+      var pts = [[x * cell, y * cell]], segs = 2 + Math.floor(r() * 4);
+      for (var k = 0; k < segs; k++) {
+        var len = 2 + Math.floor(r() * 7);
+        x += DIRS[d][0] * len; y += DIRS[d][1] * len;
+        pts.push([x * cell, y * cell]);
+        d = (d + (r() < .5 ? 1 : 7)) % 8;
+      }
+      var total = 0, lens = [];
+      for (k = 1; k < pts.length; k++) { var l = Math.hypot(pts[k][0] - pts[k-1][0], pts[k][1] - pts[k-1][1]); lens.push(l); total += l; }
+      b.traces.push({ pts: pts, lens: lens, total: total, t: r(), speed: 40 + r() * 50, on: r() < .55 });
+      g.globalAlpha = light ? .11 : .26;
+      g.beginPath(); g.moveTo(pts[0][0], pts[0][1]);
+      for (k = 1; k < pts.length; k++) g.lineTo(pts[k][0], pts[k][1]);
+      g.stroke();
+      [pts[0], pts[pts.length - 1]].forEach(function (pt, j) {
+        g.globalAlpha = light ? .28 : .5; g.beginPath(); g.arc(pt[0], pt[1], 4, 0, 6.2832);
+        if (j) { g.fill(); } else { g.globalAlpha = 1; g.fillStyle = padBg; g.fill(); g.fillStyle = color; g.globalAlpha = light ? .28 : .5; g.stroke(); }
+      });
+    }
+    g.globalAlpha = 1;
+    paint(b, 0);
+  }
+  function paint(b, dt) {
+    var c = b.ctx; if (!b.w) return;
+    c.clearRect(0, 0, b.w, b.h);
+    c.drawImage(b.base, 0, 0, b.w, b.h);
+    if (reduce) return;
+    c.fillStyle = b.color; c.shadowColor = b.color; c.shadowBlur = b.light ? 6 : 10;
+    b.traces.forEach(function (tr) {
+      if (!tr.on) return;
+      tr.t += dt * tr.speed / tr.total; if (tr.t > 1.4) tr.t = -0.4 * Math.random();
+      if (tr.t < 0 || tr.t > 1) return;
+      var dist = tr.t * tr.total, k = 0;
+      while (k < tr.lens.length - 1 && dist > tr.lens[k]) { dist -= tr.lens[k]; k++; }
+      var f = Math.min(1, dist / tr.lens[k]), a = tr.pts[k], z = tr.pts[k + 1];
+      c.globalAlpha = b.light ? .6 : .9; c.beginPath(); c.arc(a[0] + (z[0] - a[0]) * f, a[1] + (z[1] - a[1]) * f, 2.4, 0, 6.2832); c.fill();
+    });
+    c.globalAlpha = 1; c.shadowBlur = 0;
+  }
+  function buildAll() { boards.forEach(build); }
+  buildAll();
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(buildAll, 150); });
+  if (!reduce) {
+    var last = 0;
+    (function loop(t) {
+      var dt = Math.min(.05, (t - last) / 1000 || 0); last = t;
+      boards.forEach(function (b) {
+        var rc = b.cv.getBoundingClientRect();
+        if (rc.bottom > 0 && rc.top < window.innerHeight) paint(b, dt);
+      });
+      requestAnimationFrame(loop);
+    })(0);
+  }
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', buildAll);
+
+  // Menú hamburguesa en pantallas chicas.
+  var menu = document.getElementById('menu'), menuBtn = document.getElementById('menu-btn');
+  function setMenu(open) {
+    menu.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  }
+  menuBtn.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); });
+  links.forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  document.addEventListener('click', function (ev) { if (!topbar.contains(ev.target)) setMenu(false); });
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') setMenu(false); });
+
+  // Fotos de la portada: rotan solas y cambian con un click.
+  var photoBtn = document.getElementById('photo'), dotsBox = document.getElementById('dots');
+  var photos = Array.prototype.slice.call(photoBtn.querySelectorAll('img')), cur = 0, timer = null;
+  var dots = photos.map(function () { var d = document.createElement('i'); dotsBox.appendChild(d); return d; });
+  function showPhoto(n) {
+    cur = (n + photos.length) % photos.length;
+    photos.forEach(function (im, i) { im.classList.toggle('on', i === cur); });
+    dots.forEach(function (d, i) { d.classList.toggle('on', i === cur); });
+  }
+  function startPhotos() { if (!reduce) { clearInterval(timer); timer = setInterval(function () { showPhoto(cur + 1); }, 4000); } }
+  photoBtn.addEventListener('click', function () { showPhoto(cur + 1); startPhotos(); });
+  photoBtn.addEventListener('mouseenter', function () { clearInterval(timer); });
+  photoBtn.addEventListener('mouseleave', startPhotos);
+  showPhoto(0); startPhotos();
+
+  // Las tarjetas aparecen con una animación corta al entrar en pantalla.
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('reveal'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.card, .edu, .skill, .project, .contact-item, .span-bar, .path').forEach(function (el) {
+      if (el.getBoundingClientRect().top > window.innerHeight) io.observe(el);
+    });
+  }
+})();
+</script>
+</body>
+</html>
